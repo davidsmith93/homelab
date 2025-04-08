@@ -1,0 +1,23 @@
+services:
+  radarr-films:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr-films
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ./radarr:/config
+      - /media/david/Larry/Films:/movies
+      - /media/downloads:/media/downloads
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+        - films
+
+networks:
+  films:
+    driver: bridge

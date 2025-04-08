@@ -1,0 +1,36 @@
+services:
+  airsonic-audiobooks:
+    image: airsonic/airsonic:latest
+    container_name: airsonic-audiobooks
+    ports:
+      - 4040:4040
+    volumes:
+      - /media/david/Larry/Books:/airsonic/audiobooks
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+        - audiobooks
+
+  readarr-audiobooks:
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr-audiobooks
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ./readarr:/config
+      - /media/david/Larry/Books:/books
+      - /media/downloads:/media/downloads
+    ports:
+      - 8787:8787
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+        - audiobooks
+
+networks:
+  audiobooks:
+    driver: bridge

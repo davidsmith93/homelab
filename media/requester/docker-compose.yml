@@ -1,0 +1,21 @@
+services:
+  jellyseerr-requester:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr-requester
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=Europe/London
+      - PORT=5055
+    ports:
+      - 5055:5055
+    volumes:
+      - ./jellyseerr:/app/config
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - requester
+
+networks:
+  requester:
+    driver: bridge
