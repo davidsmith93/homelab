@@ -1,1 +1,9 @@
 /management/portainer/**
+/media/anime/bazaar/**
+/media/anime/sonarr/**
+/media/audiobooks/airsonic/**
+/media/audiobooks/readarr/**
+/media/films/radaar/**
+/media/indexer/prowlarr/**
+/media/requester/jellyseerr/**
+/media/tv/sonarr/**
